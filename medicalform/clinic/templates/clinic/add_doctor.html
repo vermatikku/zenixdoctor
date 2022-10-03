@@ -1,0 +1,200 @@
+{% extends "clinic/clinic_layout.html" %}
+{%load static%}
+
+{% block body_wraper_opner %}
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+{% endblock %}
+
+{% block body_block %}
+    <!-- Body starts here -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          {% if success %}
+          <div class="alert alert-success" role="alert">
+            Doctor Created
+          </div>
+          {% elif error %}
+          <div class="alert alert-danger" role="alert">
+            Email already exist
+          </div>
+          {% endif %}
+          <div class="row mb-1">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Add Doctor</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <button type="button" class="btn btn-primary" data-target="#create-doctor" data-toggle="modal"><i class="fas fa-medkit"></i> &nbsp;Create New Doctor</button>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.content-header -->
+      <section class="content">
+        <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header d-flex p-0">
+              <h3 class="card-title p-3" id="formTitle">Search Doctor</h3>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+              <form id="patientInformationForm" class="validate-form" method="POST">
+
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="emailAddress">Email Address</label>
+                      <input type="email" name="email" class="form-control" id="emailAddress" placeholder="Enter doctor email id">
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="userName">User Name</label>
+                      <input type="text" name="user_name" class="form-control" id="userName" placeholder="Enter doctor user name">
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label class="d-none d-md-block" for="userName">&nbsp;</label>
+                      <button type="submit" class="btn btn-primary btn-block" id="">Search</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-2 py-3 text-center">
+                  <img src="../dist/img/doctor-avatar.jpg" alt="user-avatar" class="profile-user-img img-fluid img-circle">
+                </div>
+                <div class="col-md-5">
+                  <h2 class="lead"><b>Dr. T. Ramakrishna</b></h2>
+                  <p class="text-muted">BDS, MDS - Oral And MaxilloFacial Surgeon, Dentist, Dental Surgeon, Implantologist</p>
+                  <p class="text-muted"><b>About: </b>BDS, MDS - Oral And MaxilloFacial Surgeon, Dentist, Dental Surgeon, Implantologist</p>
+                </div>
+                <div class="col-md-3">
+                  <span><i class=" mr-1"></i></span>
+                  <ul class="ml-4 mb-0 fa-ul text-muted">
+                    <li><span class="fa-li"><i class="fas fa-clock"></i></span> Tue, Thu, Sat - 9:30am - 3:30pm</li>
+                    <li><span class="fa-li"><i class="fas fa-envelope"></i></span> <b>Email:</b> doctor@zenixspace.com</li>
+                    <li><span class="fa-li"><i class="fas fa-phone-alt"></i></span> <b>Phone:</b> + 800 - 12 12 23 52</li>
+                  </ul>
+                </div>
+                <div class="col-md-2 pt-5 pb-3 text-center">
+                  <button type="button" class="btn btn-primary">Send Request</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </section>
+    </div>
+
+    <div class="modal fade" id="create-doctor">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="POST">
+            {% csrf_token %}
+            <div class="modal-header">
+              <h4 class="modal-title">Create Doctor</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="doctorFullName">Full Name</label>
+                      <input type="text" name="full_name" class="form-control" id="doctorFullName" placeholder="Doctor's Full Name" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="doctorEmail">Email Id</label>
+                      <input type="email" name="email" class="form-control" id="doctorEmail" placeholder="Doctor's Email Id" required>
+                    </div>
+                    <div id = "doctorEmailError"></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="doctorPhone">Phone Number</label>
+                      <input type="tel" name="phone_no" class="form-control" id="doctorPhone" placeholder="Doctor's Phone No." required>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create Doctor</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- Body ends here -->
+
+
+      <!-- Footer starts here -->
+      <footer class="main-footer">
+        <strong>Copyright &copy; 2020 <a href="http://ideatebox.com">Ideatebox</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+          <b>Version</b> 3.0.4
+        </div>
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
+
+    <!-- ./wrapper -->
+  {% endblock %}
+
+  {% block body_wraper_closer %}
+      </div>
+  {% endblock %}
+
+{% block jswraper %}
+
+<script>
+$("#doctorEmail").blur(function(){
+  var username = $(this).val();
+
+
+  $.ajax({
+    url : '{% url "validate_username" %}',
+    dataType : 'json',
+    data : {
+      'username' : username
+    },
+
+    success : function(data){
+      if(data.is_taken){
+        $("#doctorEmailError").empty();
+        $("#doctorEmailError").append("<small style = 'color:red;'>"+data['error']+"</small>");
+        $("#doctorEmail").focus();
+      }
+      else{
+        $("#doctorEmailError").empty();
+      }
+    }
+
+  });
+});
+
+
+</script>
+{% endblock %}

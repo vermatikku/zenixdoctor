@@ -1,0 +1,315 @@
+{% extends "layout.html" %}
+{%load static%}
+{% block body_block %}
+<style>
+  .card-purple:not(.card-outline)>.card-header {
+    background-color: #7861a8;
+}
+</style>
+<!-- Head ends here -->
+
+<body class="hold-transition login-page">
+<style>
+  @media (min-width: 768px) {
+    .register-box {
+      width: 700px !important;
+    }
+  }
+</style>
+<div class="register-box">
+  <!-- /.register-logo -->
+  <div class="card">
+    <div class="card-body register-card-body">
+      <div class="register-logo">
+        <a href="#" class="text-center">
+          <img src="{% static 'dist/img/logo.png' %}" alt="Zenixspace Logo">
+        </a>
+      </div>
+      <p class="login-box-msg" style="font-size: 20px; font-weight: 600;">Patient Signup</p>
+
+      <form action="" method="post" id="registration_form">
+        {% csrf_token %}
+        <div class="row mb-2">
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="text" id ="first_name" class="form-control" name="first_name" placeholder="First name" value="{{ first_name }}" {{ first_name|yesno:"readonly,a" }} required data-toggle="tooltip" data-placement="top" title="Please enter your first name">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="text" class="form-control" name="middle_name" placeholder="Middle name" value="{{ middle_name }}" {{ first_name|yesno:"readonly,a" }} data-toggle="tooltip" data-placement="top" title="Enter your middle name">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="text" id ="last_name" class="form-control" name="last_name" placeholder="Last name" value="{{ last_name }}" {{ last_name|yesno:"readonly,a" }} required data-toggle="tooltip" data-placement="top" title="Please enter your last name">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="email" id="email" class="form-control" name="email" placeholder="Email" value="{{ email }}" {{ email|yesno:"readonly,a" }} required data-toggle="tooltip" data-placement="top" title="Enter your email address">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="text" class="form-control" name="dob" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date of Birth" value="{{ dob }}" {{ dob|yesno:"readonly,a" }} required id="dob" data-toggle="tooltip" data-placement="top" title="Enter your Date of Birth">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-birthday-cake"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div><label for="lastName">Sex</label></div>
+              <div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" title="Please select the sex of the patient">
+                  <label class="btn btn-secondary rounded mr-1">
+                    <input type="radio" name="gender" value="Male" id="gender_1" autocomplete="off" checked required> Male
+                  </label>
+                  <label class="btn btn-secondary rounded mr-1">
+                    <input type="radio" name="gender" value="Female" id="gender_2" autocomplete="off" required> Female
+                  </label>
+                  <label class="btn btn-secondary rounded">
+                    <input type="radio" name="gender" value="Other" id="gender_3" autocomplete="off" required> Other
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" id ="username" class="form-control" name="username" placeholder="Username" value="{{ email }}"  required data-toggle="tooltip" data-placement="top" title="Username">
+          <div class="col-md-6 mb-3 parent_details" style="display: none;">
+            <div class="input-group">
+              <input type="text" class="form-control" name="parent_name" placeholder="Parent/Guardian Name" id="parent_name" data-toggle="tooltip" data-placement="top" title="Please enter name of Parent or Guardian">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3 parent_details" style="display: none;">
+            <div class="input-group">
+              <input type="text" class="form-control" name="pdob" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Please enter date of birth of Parent or Guardian" id="pdob" data-toggle="tooltip" data-placement="top" title="Please enter date of birth of Parent or Guardian">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-birthday-cake"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <input type="password" class="form-control" name="password" placeholder="Password" required id="password1" data-toggle="tooltip" data-placement="top" title="Please set a  password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="input-group">
+              <input type="password" class="form-control" name="repassword" placeholder="Re Enter Password" required id="password2" data-toggle="tooltip" data-placement="top" title="Please Re Enter Password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="input-group">
+              <input type="text" class="form-control" name="address" placeholder="Address" required data-toggle="tooltip" data-placement="top" title="Please enter your address">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-map-marker"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="input-group">
+              <input type="text" class="form-control" name="post_code" placeholder="Postal Code" required id="post_code" data-toggle="tooltip" data-placement="top" title="Please enter valid Postal Code format  (T3G 4P5)">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-map-pin"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="tel" class="form-control" name="phone" pattern="^\d{10}$" placeholder="Mobile" required id="phone1" data-toggle="tooltip" data-placement="top" title="Please enter your mobile">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-phone"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="tel" class="form-control" name="home_contact" pattern="^\d{10}$" placeholder="Home Contact" id="phone2" data-toggle="tooltip" data-placement="top" title="Please enter your home contact no.">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-home"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="input-group">
+              <input type="tel" class="form-control" name="work_contact" pattern="^\d{10}$" placeholder="Work Contact" id="phone3" data-toggle="tooltip" data-placement="top" title="Please enter your work contact No.">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-building"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+              <label for="agreeTerms">
+               I agree to the <a href="#">terms</a>
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="button" class="btn btn-primary btn-block" id="register-form-submit" disabled>Register</button>
+          </div>
+          <!-- /.col -->
+        </div>
+        <div>
+          <span style="display: block;width: 100%;text-align: center;color: red;" id="form-error-container"> {{ error }} </span>
+        </div>
+        <div>
+          <span style="display: block;width: 100%;text-align: center;color: green;" id="form-success-container"> {{ success }} </span>
+      </div>
+      </form>
+
+      <!-- <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i>
+          Sign up using Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i>
+          Sign up using Google+
+        </a>
+      </div> -->
+
+      <a href="/login/" class="text-center">I am already registered</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+{% endblock %}
+{% block jswraper %}
+<script>
+  $(function(){
+    //validate password matched or not
+    //check first name and last name is available or not
+    //check age
+    //take parent details
+    //validate phone no
+    //postal code validate
+    function calculate_age(rawdob){
+      dob = new Date(rawdob)
+      let diff_ms = Date.now() - dob.getTime();
+      let age_dt = new Date(diff_ms);
+      return Math.abs(age_dt.getUTCFullYear() - 1970);
+    }
+    $(document).on('change','#dob',function(){
+      age = calculate_age($('#dob').val())
+      if(age<16){
+        $('.parent_details').show()
+      }else{
+        $('.parent_details').hide()
+      }
+    })
+    $(document).on('change','#agreeTerms',function(){
+      if($('#agreeTerms').prop("checked")){
+        $('#register-form-submit').attr('disabled',false)
+      }else{
+        $('#register-form-submit').attr('disabled',true)
+      }
+    })
+    $(document).on('click','#register-form-submit',function(){
+      //reset error-container box
+      $('#form-error-container').text('')
+      //get the user name is available
+      let user_name_regx = /[a-z][a-z0-9]{7}/;
+      let postalregx = /[a-ceghj-nprstvxyA-CEGHJ-NPRSTVXY][0-9][a-ceghj-nprstv-zA-CEGHJ-NPRSTV-Z](-| |)[0-9][abceghjklmnprstvwxyzABCEGHJKLMNPRSTVWXYZ][0-9]/
+      let phoneregx = /[1-9][01][0-9](-| |)[0-9]{3}(-| |)[0-9]{4}/
+      let user_name_url = '/availability/'+$('#username').val()+'/'
+      let user_name_validated = 0
+      let age = calculate_age($('#dob').val())
+      let age2 = calculate_age($('#pdob').val())
+      $.get(user_name_url,function(data){
+        user_name_validated = data 
+        user_name_validated = JSON.parse(user_name_validated)
+        if($('#first_name').val() =='' || $('#last_name').val()==''){
+          $('#form-error-container').text('First name and last name can not be empty')
+        // }else if(!user_name_regx.test($('#username').val())){
+        }else if(false){
+          $('#form-error-container').text('Username can contain only alphabates and number and must have at least 8 character')
+        // }else if(!user_name_validated['avaliability']){
+        }else if(false){
+          $('#form-error-container').text('Username already exist')
+        }else if(age<16 && $('#parent_name').val()==''){
+          $('#form-error-container').text('Invalid parent details')
+        }else if(age<16 && age2 <16 ){
+          $('#form-error-container').text('Invalid parent details')
+        }else if($('#password1').val().length < 8){
+          $('#form-error-container').text('Password must have min length 8')
+        }else if($('#password1').val()!=$('#password2').val()){
+          $('#form-error-container').text('Password and confirm password not matched')
+        }else if(!postalregx.test($('#post_code').val())){
+          $('#form-error-container').text('Invalid postal code')
+        }else if($('#phone1').val()==''&& $('#phone2').val()=='' && $('#phone3').val()==''){
+          $('#form-error-container').text('phone no is required')
+        }else{
+            if(phoneregx.test($('#phone1').val())){
+              $('#registration_form').submit()   
+            }else if(phoneregx.test($('#phone2').val())){
+              $('#registration_form').submit()
+            }else if(phoneregx.test($('#phone3').val())){
+              $('#registration_form').submit()
+            }else{
+              $('#form-error-container').text('invalid phone number')
+            }
+        }        
+      })//username validated
+    })//button click
+  })//document ready
+</script>
+{% endblock %}

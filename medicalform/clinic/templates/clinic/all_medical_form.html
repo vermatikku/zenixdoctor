@@ -1,0 +1,191 @@
+
+{% extends "clinic/clinic_layout.html" %}
+{%load static%}
+{% block body_wraper_opner %}
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+{% endblock %}
+
+{% block body_block %}
+    <!-- Body starts here -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          {% if success %}
+          <div class="alert alert-success" role="alert">
+            Patient Created
+          </div>
+          {% elif error %}
+          <div class="alert alert-danger" role="alert">
+            Email already exist
+          </div>
+          {% endif %}
+          <div class="row mb-1">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Medical Form List</h1>
+            </div><!-- /.col -->
+            <!-- <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <button type="button" class="btn btn-primary" data-target="#create-patient" data-toggle="modal"><i class="fas fa-medkit"></i> &nbsp;Create New patient</button>
+              </ol>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <!-- /.content-header -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Medical Form List</h3>
+                </div>
+                <div class="card-body">
+                  <table id="patientlist" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Medical Form Name</th>
+                      <!-- <th>Doctor</th> -->
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      {% for each_forms in all_medical_form %}
+                      <tr>
+                        <td>{{each_forms.form_name}}</td>
+                        <td>
+                          <a href="{% url 'clinic_medical_form_details_url' clinicname=clinicname form_id=each_forms.pk %}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> &nbsp;View Details</a>
+
+                          <button class="btn btn-success btn-sm send-form" id = '{{ each_forms.pk }}' data-id='{{ each_forms.pk }}' name = ''><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Body ends here -->
+    <div class="modal fade" id="send-medical-form">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="POST" id="medical-form">
+            {% csrf_token %}
+            <input type="hidden" name="form_id" id='medical-form-id'>
+        <!--  <div id = "list-form-selected"></div>-->
+            <div class="modal-header">
+              <h4 class="modal-title">Send Form</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+                <div class="row">
+                  <div class="col-12 full_name">
+                    <div class="form-group">
+                      <label for="patientFullName">Full Name</label>
+                      <input type="text" name="full_name" id="full_name" class="form-control" id="patientFullName" placeholder="Patient's Full Name">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="patientEmail">Email Id</label>
+                      <input type="email" name="email" id="email" class="form-control" id="patientEmail" placeholder="Patient's Email Id">
+                    </div>
+                  </div>
+                  <div class="col-md-12 dob">
+                    <div class="form-group">
+                      <label for="patientDob">Date Of Birth</label>
+                      <input type="text" class="form-control" id="dob" name="dob" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date of Birth">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <div class="col-12" style="color:red;text-align: center;" id="errormsg"></div>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id='send-medical-form-button'>Send Form</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <!-- Footer starts here -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2020 <a href="http://ideatebox.com">Ideatebox</a>.</strong>
+      All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.4
+      </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  {% endblock %}
+
+{% block body_wraper_closer %}
+</div>
+{% endblock %}
+{% block jswraper %}
+<script>
+  $(function(){
+    $('.full_name').hide()
+    $('.dob').hide()
+    $(document).on('click','.send-form',function(data){
+      $('#medical-form-id').val($(this).data('id'))
+      $('#email').val('')
+      $('#name').val('')
+      $('#dob').val('')
+      $('#send-medical-form').modal('show')
+
+    })
+    $(document).on('click','#send-medical-form-button',function(data){
+      let email = $('#email').val()
+      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if(!regex.test(email))
+      {
+        $('#errormsg').text('Not a valid email')
+        return false;
+      }
+      //check
+
+      let email_url = '/email-availability/'+email+'/'
+      $.get(email_url,function(edata){
+        email_validated = JSON.parse(edata)
+        if(email_validated['avaliability']){
+          //show name and dob
+          //flash message email not registered
+          pname = $('#name').val()
+          pdob =  $('#dob').val()
+          if(pname == '' || pdob == ''){
+            $('.full_name').show()
+            $('.dob').show()
+            $('#errormsg').text('Patient not registerd please fill up basic details')
+          }else{
+
+            $('#medical-form').submit()
+          }
+        }else{
+
+          $('#medical-form').submit()
+        }
+      })
+
+    })
+  })
+</script>
+{% endblock %}

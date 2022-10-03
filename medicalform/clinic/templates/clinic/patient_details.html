@@ -1,0 +1,297 @@
+{% extends "clinic/clinic_layout.html" %}
+{%load static%}
+{% block body_wraper_opner %}
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+{% endblock %}
+{% block body_block %}
+    <!-- Body starts here -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-1">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Patient Details</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Patient</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.content-header -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body box-profile">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="text-center">
+                        <img class="profile-user-img img-circle img-fluid" src="{% static user_profile_pic %}" alt="">
+                        <h5>{{ name }}</h5>
+                      </div>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="row pt-4">
+                        <div class="col-md-4">
+                          <span><b>Name : </b>{{ name }}</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Gender : </b>{{ gender }}</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Email :</b> {{ email }} </span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Date of Birth : </b>{{ dob }}</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Address : </b>{{ address }}</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Pincode :</b> {{ postalcode }} </span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Phone : </b>{{ phone }}</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Home Contact : </b>{{ home_contact }}</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Work Contact :</b> {{ work_contact }} </span>
+                        </div>
+                      </div> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card card-primary card-tabs">
+                <div class="card-header p-0 pt-1">
+                  <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="true">Insurance</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">History Questionnaire</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade" id="custom-tabs-one-profile1" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <span><b>Name of Employer : </b>John Doe</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Identification Number : </b>78654321</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Name of Insurance Co. : </b>Dr. Gurpreet Gill</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Occupation : </b>Doctor</span>
+                        </div>
+                        <div class="col-md-4">
+                          <span><b>Group/ Policy :</b> Policy </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-messages1" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 1. Are you being treated for any medical condition at the present or have you been treated within the past year? If so, why?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 2. When was your last dental checkup?</b></p>
+                          <p><b>A.</b> Last 30 days</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 3. Has there been any change in your general health in the past year? If yes, please explain.</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 4. Are you taking any medications, non-prescription drugs or herbal supplements of any kind? If yes, please list.</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 5. Do you have any allergies? If you answered yes, please list using the categories below:</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 6. Have you ever had a peculiar or adverse reaction to any medications or injection? If yes, please expain:</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 7. Do you have or have you ever had asthma?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 8. Do you have or have you ever had any heart or blood pressure problems?</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 9. Do you have or have you ever had a heart murmur, mitral valve prolapse or rheumatic fever?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 10. Do you have a prosthetic or artificial joint?</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 11. Have you ever been advised by your doctor to take antibiotics before dental treatment?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 12. Do you have any conditions or therapies that could affect your immune system? (eg. leukemia, AIDS, HIV infection radiotherapy, chemotherapy)</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 13. Have you ever had hepatitis, jaundice or liver disease?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 14. Do you have a bleeding problem or bleeding disorder?</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 15. Have you ever been hospitalized for any illness or operations? If yes, please explain:</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 16. Do you have or have you ever had any of following? Please check.</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 17. Are there any conditions or disease not listed above that you have or have had? If so, what?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 18. Are there any disease or medical problems that run in our family? (eg. diabetes, cancer or heart disease)</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 19. Do you smoke or chew tobacco products?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 20. Are you nervous during dental treatment?</b></p>
+                          <p><b>A.</b> No</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p><b>Q 21. For women only: Are you breast-feeding or pregnant, what is expected delivery date?</b></p>
+                          <p><b>A.</b> Yes</p>
+                          <p><b>Explanation:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                      <hr>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                      Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Footer starts here -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2020 <a href="http://ideatebox.com">Ideatebox</a>.</strong>
+      All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.4
+      </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+{% endblock %}
+{% block body_wraper_closer %}
+    </div>
+{% endblock %}

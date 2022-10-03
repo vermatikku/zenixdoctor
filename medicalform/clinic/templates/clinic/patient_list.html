@@ -1,0 +1,210 @@
+{% extends "clinic/clinic_layout.html" %}
+{%load static%}
+{% block body_wraper_opner %}
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+{% endblock %}
+
+{% block body_block %}
+    <!-- Body starts here -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          {% if success %}
+          <div class="alert alert-success" role="alert">
+            Patient Created
+          </div>
+          {% elif error %}
+          <div class="alert alert-danger" role="alert">
+            Email already exist
+          </div>
+          {% endif %}
+          <div class="row mb-1">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Patient List</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <button type="button" class="btn btn-primary" data-target="#create-patient" data-toggle="modal"><i class="fas fa-medkit"></i> &nbsp;Create New patient</button>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.content-header -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Patient List</h3>     
+                </div>
+                <div class="card-body">
+                  <div id="patient-list-selected">
+                    {% csrf_token %}
+                    <table id="patientlist" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>Select</th>
+                        <th>Patient Name</th>
+                        <th>Email</th> 
+                        <th>Contact No.</th>
+                        <!-- <th>Doctor</th> -->
+                        <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        {% for patient in patients %}
+                        <tr>
+                          <td><input type="checkbox" name="patients[]" value="{{ patient.user.username }}"></td>
+                          <td>{{ patient.user.first_name }} {{ patient.user.last_name }}</td>
+                          <td>{{ patient.user.email }}</td>
+                          <td>{{ patient.phone }}</td>
+                          <td>
+                            <a href="{{ patient.user.username }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> &nbsp;View Details</a>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td><button type="button" id='medical-form-model-btn' class="btn btn-primary" data-target="#medical-forms" data-toggle="modal"><i class="fas fa-medkit"></i> &nbsp;Send Forms</button></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Body ends here -->
+
+    <div class="modal fade" id="create-patient">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="POST">
+            {% csrf_token %}
+            <div class="modal-header">
+              <h4 class="modal-title">Create Patient</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="patientFullName">Full Name</label>
+                      <input type="text" name="full_name" class="form-control" id="patientFullName" placeholder="Patient's Full Name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="patientPhone">Phone Number</label>
+                      <input type="tel" name="phone_no" class="form-control" id="patientPhone" placeholder="Patient's Phone No.">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="patientEmail">Email Id</label>
+                      <input type="email" name="email" class="form-control" id="patientEmail" placeholder="Patient's Email Id">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="patientDob">Date Of Birth</label>
+                      <input type="text" class="form-control" name="dob" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date of Birth">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" name="create_patient" value="1">Create Patient</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-----model for forms-->
+    <div class="modal fade" id="medical-forms">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="list-patient-selected">
+            </div>
+            <div class="modal-header">
+              <h4 class="modal-title">Send Forms</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form">
+                <div class="row">
+                  {% for each_forms in all_medical_form %}
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="{{ each_forms.pk }}">{{each_forms.form_name}}</label>
+                        <input type="checkbox" name="medical_forms[]" id="{{ each_forms.pk }}" value="{{ each_forms.pk }}">
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" name="send_form" value="1">Send Forms</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- Footer starts here -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2020 <a href="http://ideatebox.com">Ideatebox</a>.</strong>
+      All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.4
+      </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  {% endblock %}
+
+{% block body_wraper_closer %}
+</div>
+{% endblock %}
+{% block jswraper %}
+<script>
+  $(function(){
+    $(document).on('click','#medical-form-model-btn',function(){
+      $("#list-patient-selected").html('')
+      $.each($("#patient-list-selected input[type='checkbox']:checked"),function(){
+        $("#list-patient-selected").append('<input type="hidden" name="username[]" value="'+$(this).val()+'">')
+      })
+    })
+  })
+</script>
+{% endblock %}

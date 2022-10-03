@@ -1,0 +1,7 @@
+this is a dummy file and i want to upload it
+without any conflict
+
+checking wether it is working in good way or not
+no one added any files in  repository
+
+edited by master thanks for your contribution

@@ -1,0 +1,348 @@
+{% extends "clinic/clinic_layout.html" %}
+{%load static%}
+
+{% block body_wraper_opner %}
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+{% endblock %}
+
+{% block body_block %}
+    <!-- Body starts here -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-1">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Clinic Details</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Doctor</li> -->
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.content-header -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3">
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                  <div class="dropdown show text-right mt-20 mr-10">
+                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v text-muted text-lg"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a href="#" class="dropdown-item" data-target="#uploadpic" data-toggle="modal">Change Profile Picture</a>
+                        <a href="#" class="dropdown-item" data-target="#changePass" data-toggle="modal">Change Password</a>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <img class="profile-user-img img-fluid img-circle" src="{% static user_profile_pic %}"alt="User profile picture">
+                  </div>
+                  <h6 class="profile-username text-center">{{clinic_name}}</h6>
+                  <p class="text-muted text-center">{{clinic_specilities}}</p>
+                  <a href="#" class="btn btn-primary btn-block" onclick="ShowAndHide()" id="editProfile1" autocomplete="off" required><b>Edit Details</b></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9" >
+              <div class="card card-primary card-tabs" id="ClinicDetails">
+                <div class="card-header p-0 pt-1">
+                  <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                   <!--  <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">About Doctor</a>
+                    </li> -->
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="true">About Clinic</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Reviews</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade show active" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <!-- <h6>Midland, Canada</h6> -->
+                          <span class="description">{{ clinic_description }}</span>
+                          <!-- <p title="4.5 of 5">
+                            <span class="rating fa fa-star"></span>
+                            <span class="rating fa fa-star"></span>
+                            <span class="rating fa fa-star"></span>
+                            <span class="rating fa fa-star"></span>
+                            <span class="rating fa fa-star-half-alt"></span> ({{ total_reviewer }} reviews)
+                          </p> -->
+                        </div>
+                        <!-- <div class="col-md-4">
+                          <span><i class="fa fa-clock mr-2"></i>Tue, Thu, Sat</span>
+                          <p class="pl-4">9:30am - 3:30pm</p> -->
+                          <!-- <p class="pt-1 pl-1"><i class="fas fa-map-marker-alt mr-2"></i><a href="">Get Directions</a></p> -->
+                        <!-- </div> -->
+                          <!-- <div class="col-md-3">
+                            <strong class="d-inline-block mb-2">Photos</strong>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <a href="../dist/img/avatar.jpg" data-toggle="lightbox" data-title="sample 2 - black" data-gallery="gallery">
+                                  <img src="../dist/img/avatar.jpg" class="img-fluid mb-2" alt="black sample"/>
+                                </a>
+                              </div>
+                              <div class="col-sm-3">
+                                <a href="../dist/img/avatar.jpg" data-toggle="lightbox" data-title="sample 3 - red" data-gallery="gallery">
+                                  <img src="../dist/img/avatar.jpg" class="img-fluid mb-2" alt="red sample"/>
+                                </a>
+                              </div>
+                              <div class="col-sm-3">
+                                <a href="../dist/img/avatar.jpg" data-toggle="lightbox" data-title="sample 5 - black" data-gallery="gallery">
+                                  <img src="../dist/img/avatar.jpg" class="img-fluid mb-2" alt="black sample"/>
+                                </a>
+                              </div>
+                              <div class="col-sm-3">
+                                <a href="../dist/img/avatar.jpg" data-toggle="lightbox" data-title="sample 6 - white" data-gallery="gallery">
+                                  <img src="../dist/img/avatar.jpg" class="img-fluid mb-2" alt="white sample"/>
+                                </a>
+                              </div>
+                            </div>
+                          </div> -->
+
+                          <div class="col-md-12">
+                            <span class=""><b>{{clinic_address}}</b><!-- may need br --></span>
+                            <!-- <p class="pt-1"><a href="">Get Directions</a></p> -->
+                          </div>
+                        </div>
+                      </div>                        
+                      <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                        {% for review in reviews %}
+                          <div class="row">
+                            <div class="post">
+                              <div class="user-block">
+                               
+                                <img class="img-circle img-bordered-sm" src="{% static review.profile_pic %}" alt="user image">
+                                <span class="username">
+                                  <a href="#">{{ review.name }}</a>
+                                  <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                                </span>
+                                <div class="col-12 col-md-6 pl-5" title="{{ review.star_rating }} of 5">
+                                  <span class="rating fa fa-star"></span>
+                                  <span class="rating fa fa-star"></span>
+                                  <span class="rating fa fa-star"></span>
+                                  <span class="rating fa fa-star"></span>
+                                  <span class="rating fa fa-star-half-alt"></span> <!--(11 reviews)-->
+                                </div>
+                                <p>{{ review.review_desc }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                        <div class="container py-3">
+                          <div class="row">
+                            <div class="col-12 col-md-10 mx-auto">
+                              <div class="accordion" id="faqExample">
+                                <div class="card">
+                                  <div class="card-header p-2" id="headingOne">
+                                    <span class="mb-0">
+                                      <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fa fa-plus pr-2"></i><b>How can I take appointments for doctors in Expressions Dental Clinics : Dental Care & Implant Center?</b>
+                                      </button>
+                                    </span>
+                                  </div>
+                                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqExample">
+                                    <div class="card-body">
+                                      You can take appointments for doctors who practice in Expressions Dental Clinics : Dental Care & Implant Center online on Practo.
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card">
+                                  <div class="card-header p-2" id="headingTwo">
+                                    <h5 class="mb-0">
+                                      <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <i class="fa fa-plus pr-2"></i> <b>What do doctors who practice in Expressions Dental Clinics : Dental Care & Implant Center specialise in?</b>
+                                      </button>
+                                    </h5>
+                                  </div>
+                                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqExample">
+                                    <div class="card-body">
+                                      Currently around 2 doctors practice in Expressions Dental Clinics : Dental Care & Implant Center who specialise as dentist.
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card">
+                                  <div class="card-header p-2" id="headingThree">
+                                    <h5 class="mb-0">
+                                      <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <i class="fa fa-plus pr-2"></i> <b>What are the Expressions Dental Clinics : Dental Care & Implant Center timings?</b>
+                                      </button>
+                                    </h5>
+                                  </div>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
+                                  <div class="card-body">
+                                    Clinic is usually open during MON - SAT 09:30 - 15:00. You can contact the clinic through Practo.
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card">
+                                  <div class="card-header p-2" id="headingThree">
+                                    <h5 class="mb-0">
+                                      <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <i class="fa fa-plus pr-2"></i> <b>Where is Expressions Dental Clinics : Dental Care & Implant Center located?</b>
+                                      </button>
+                                    </h5>
+                                  </div>
+                                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
+                                    <div class="card-body">
+                                      Expressions Dental Clinics : Dental Care & Implant Center is located in 5284, Hardhyan Singh Marg, Krishan Nagar, Behind Khalsa College, Karol Bagh, Delhi, Delhi 110005. You can view more details about the clinic and book doctors on practo.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" id="yesEdit" style="display: none;">
+                    <div class="col-md-12">
+                      <div class="card card-primary">
+                        <div class="card-header d-flex p-0">
+                          <h3 class="card-title p-3" id="formTitle">Edit Profile</h3>
+                        </div>
+                        <div class="card-body">
+                         
+                          <form id="patientInformationForm" class="validate-form" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="firstName">Clinic Name</label>
+                                  <input type="text" name="clinic_name" class="form-control" id="clinicName" value ="{{ clinic_name }}" placeholder="Enter clinic name" required>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="clinicAddress">Address</label>
+                                  <input type="text" name="clinic_address" class="form-control" id="clinicAddress" value="{{ clinic_address }}" placeholder="Enter address" required>
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label for="clinicTime">Description</label>
+                                  <textarea name="clinic_description" class="form-control" id="clinicTime" placeholder="" required="" cols="30" rows="5">{{ clinic_description }}</textarea>
+                                  <!-- <input type="time" name="time" > -->
+                                </div>
+                              </div>
+                              <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="clinicService">Service</label>
+                                  <input type="text" name="service" class="form-control" id="clinicService" placeholder="Enter service" required>
+                                </div>
+                              </div> -->
+                              <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary float-right">Submit</button>
+                              </div>
+                            </div>
+                          </form>               
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div id="uploadpic" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <form method="POST" enctype="multipart/form-data">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Do you want to change your profile pic?</h4>           
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group col-md-12 pt-20">
+              <input name="profile_pic" class="form-control" type="file" required>
+              <p class="ptb-10" style="font-size: 12px;">* Please choose the format (jpg, jpeg, png)</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-sm btn-line" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm btn-line" name="PHOTO_UPLOAD">Upload</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="changePass" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <form method="post">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Please fill the following details:</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <label for="oldPassword">Current Password</label><br>
+                <input type="text" name="old_password" placeholder="" id="oldPassword" required>
+              </div>
+              <div class="col-md-6">
+                <label for="newPassword">New Password</label>
+                <input type="text" name="new_password" placeholder="" id="newPassword" required>
+              </div>
+              <div class="col-md-6">
+                <label for="rnewPassword">Re-enter New Password</label>
+                <input type="text" name="rnew_password" placeholder="" id="rnewPassword" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-sm btn-line" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm btn-line" name="PHOTO_DELETE">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+    <!-- Footer starts here -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2020 <a href="http://ideatebox.com">Ideatebox</a>.</strong>
+      All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.4
+      </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+{% endblock %}
+
+{% block body_wraper_closer %}
+    </div>
+{% endblock %}

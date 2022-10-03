@@ -1,0 +1,9 @@
+Hi {{ name }} Please submit following forms
+<p>&nbsp;</p>
+
+{% for each_forms in all_forms %}
+
+<a href='http://{{ domain }}/{{ clinicname }}/patient-form/{{ each_forms.pk }}/'>{{ each_forms.form_name }}</a>
+
+
+{% endfor %}

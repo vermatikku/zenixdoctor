@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+{%load static%}
+{% block body_block %}
+<style>
+  .card-purple:not(.card-outline)>.card-header {
+    background-color: #7861a8;
+}
+</style>
+<!-- Head ends here -->
+
+<body class="hold-transition login-page">
+
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <div class="login-logo">
+        <a href="#" class="text-center">
+          <img src="{% static 'dist/img/logo.png' %}" alt="Zenixspace Logo">
+        </a>
+      </div>
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id = "username" name="username" placeholder="username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+
+        </div>
+        <div id = "username-error"></div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password" id = "password_input">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <i class = "fa fa-eye-slash" id = 'eye'></i>
+            </div>
+          </div>
+        </div>
+        {% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4 offset-4">
+            <button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+  <!-- <div class="social-auth-links text-center mb-3">
+
+      <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+        </a>
+      </div> -->
+      <!-- /.social-auth-links -->
+      <hr>
+      <center><b style = "font-size:20px;">or</b></center>
+      <center>Login with</center>
+
+      <div class = "social">
+        <a href = "{% url 'social:begin' 'facebook' %}" class = "fb btn">
+          <i class = "fa fa-facebook fa-fw"></i>Facebook
+        </a>
+
+        <a href = "{% url 'social:begin' 'google-oauth2' %}" class = "google btn">
+          <i class = "fa fa-google fa-fw"></i>Google
+        </a>
+      </div>
+
+      <p class="mb-1 mt-3">
+
+        <a href="{% url 'password_reset' %}">I forgot my password</a>
+
+      </p>
+
+      <p class="mb-0">
+
+        <a href="/register/" class="text-center">New patient register here</a>
+
+      </p>
+
+    </div>
+    <!-- /.login-card-body -->
+
+  </div>
+</div>
+<!-- /.login-box -->
+{% endblock %}
+{% block jswraper %}
+<script>
+$("#username").blur(function(){
+  var username = $(this).val();
+
+
+  $.ajax({
+    url : '{% url "login_validate_username" %}',
+    dataType : 'json',
+    data : {
+      "username" : username
+    },
+    success : function(data){
+
+      if((data.is_exist) == false){
+        $("#username-error").empty();
+        $("#username-error").append("<small style = 'color:red;'>Username does not exist</small>");
+        $("#username").focus();
+
+      }
+      else{
+        $("#username-error").empty();
+      }
+    }
+  });
+});
+
+</script>
+
+
+{% endblock %}

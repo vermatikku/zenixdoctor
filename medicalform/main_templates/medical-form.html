@@ -1,0 +1,296 @@
+{% extends "layout.html" %}
+{%load static%}
+{% block body_block %}  
+
+<style>
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #ffffff;
+  }
+  .nav-pills .nav-link:not(.active):hover {
+    color: #000000;
+    background-color: #ffffff4f;
+  }
+  .quesTab {
+    display: none;
+  }
+</style>
+<body class="hold-transition py-5" style="background-color: #eee;">
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="card card-primary">
+            <div class="card-header d-flex p-0">
+              <h3 class="card-title p-3" id="formTitle">Patient Information</h3>
+              <ul class="nav nav-pills ml-auto p-2">
+                <li class="nav-item ml-1"><a class="nav-link active" href="#tab_1" data-toggle="tab" onclick="($('#formTitle').text('Patient Information'))">Patient Information</a></li>
+                <li class="nav-item ml-1"><a class="nav-link" href="#tab_2" data-toggle="tab" onclick="($('#formTitle').text('Medical History'))">Medical History</a></li>
+              </ul>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                  <!-- form start -->
+                  <form id="patientInformationForm" class="validate-form">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="firstName">First Name</label>
+                          <input type="text" name="first_name" class="form-control" id="firstName" placeholder="Enter first name" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="middleName">Middle Name</label>
+                          <input type="text" name="middle_name" class="form-control" id="middleName" placeholder="Enter middle name">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="lastName">Last Name</label>
+                          <input type="text" name="last_name" class="form-control" id="lastName" placeholder="Enter last name" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="emailAddress">Email Address</label>
+                          <input type="email" name="email" class="form-control" id="emailAddress" placeholder="Enter email address" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="dateOfBirth">Date of Birth</label>
+                          <input type="text" name="dob" class="form-control" id="dateOfBirth" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Enter date of birth" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <div><label for="lastName">Gender</label></div>
+                          <div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                              <label class="btn btn-secondary rounded mr-1">
+                                <input type="radio" name="gender" value="Male" id="gender_1" autocomplete="off" required> Male
+                              </label>
+                              <label class="btn btn-secondary rounded mr-1">
+                                <input type="radio" name="gender" value="Female" id="gender_2" autocomplete="off" required> Female
+                              </label>
+                              <label class="btn btn-secondary rounded">
+                                <input type="radio" name="gender" value="Other" id="gender_3" autocomplete="off" required> Other
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="homeAddress">Address (Home)</label>
+                          <input type="text" name="address" class="form-control" id="homeAddress" placeholder="Enter address" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="cityProvince">City/Province</label>
+                          <input type="text" name="city" class="form-control" id="cityProvince" placeholder="Enter city" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="postalCode">Postal Code</label>
+                          <input type="number" name="postal_code" class="form-control" id="postalCode" placeholder="Enter postal code" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4 class="pt-3">Insurance Information</h4>
+                        <div class="form-group">
+                          <label for="lastName" class="mb-1">Do you have any insurance plan for this treatment?</label>
+                          <div class="btn-group btn-group-toggle pl-3" data-toggle="buttons">
+                            <label class="btn btn-secondary rounded mr-1">
+                              <input type="radio" name="insurance" value="yes" id="insurance_1" onclick="($('#yesInsurance').show())" autocomplete="off" required> Yes
+                            </label>
+                            <label class="btn btn-secondary rounded">
+                              <input type="radio" name="insurance" value="no" id="insurance_2" onclick="($('#yesInsurance').hide())" autocomplete="off" required> No
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row d-none" id="yesInsurance">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="employerName">Name of Employer</label>
+                          <input type="text" name="employer_name" class="form-control" id="employerName" placeholder="Enter employer name" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="insuranceCo">Name of Insurance Co.</label>
+                          <input type="text" name="insuranceCo" class="form-control" id="insuranceCo" placeholder="Enter insurance corporation" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="groupPolicy">Group/Policy</label>
+                          <input type="text" name="group_policy" class="form-control" id="groupPolicy" placeholder="Enter group/policy" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="identificationNumber">Identification Number</label>
+                          <input type="number" name="identification_number" class="form-control" id="identificationNumber" placeholder="Enter Identification number" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="occupation">Occupation</label>
+                          <input type="text" name="occupation" class="form-control" id="occupation" placeholder="Enter occupation" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="py-3 text-center">
+                      <button type="button" class="btn btn-primary">Save and Next</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.tab-pane -->
+
+                <div class="tab-pane" id="tab_2">
+                  <p>The following information is required to enable us to provide you with the best possible dental care. All information is strictly private, and is protected by doctor-patient confidentiality. The dentist will review the questions and explain any that you do not understand. Please fill in the entire form.</p>
+                  <!-- form start -->
+                  <form id="medicalHistoryForm" class="validate-form">
+                    <div class="quesTab">
+                      <div class="row" id="medicalHistory1">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Are you being treated for any medical condition at the present or have you been treated within the past year? If so, why?</label>
+                            <div>
+                              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary rounded mr-1">
+                                  <input type="radio" name="present_past_medical_condition" value="Yes" id="present_past_medical_condition1" autocomplete="off" required> Yes
+                                </label>
+                                <label class="btn btn-secondary rounded">
+                                  <input type="radio" name="present_past_medical_condition" value="No" id="present_past_medical_condition2" autocomplete="off" required> No
+                                </label>
+                                <label class="btn btn-secondary rounded ml-1">
+                                  <input type="radio" name="present_past_medical_condition" value="Not Sure" id="present_past_medical_condition3" autocomplete="off" required> Not Sure/Maybe
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="quesTab">
+                      <div class="row" id="medicalHistory2">
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <label for="lastDentalCheckUp" class="col-md-4 col-form-label">When was your last dental checkup?</label>
+                            <div class="col-md-8">
+                              <select name="lastDentalCheckUp" class="form-control" id="lastDentalCheckUp" required>
+                                <option value="">Select one option</option>
+                                <option value="Last 30 days">Last 30 days</option>
+                                <option value="Last 6 months">Last 6 months</option>
+                                <option value="More than a year ago">More than a year ago</option>
+                                <option value="Never">Never</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="quesTab">
+                      <div class="row" id="medicalHistory3">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Has there been any change in your general health in the past year? If yes, please explain.</label>
+                            <div>
+                              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary rounded mr-1">
+                                  <input type="radio" name="change_in_health" value="Yes" id="present_past_medical_condition1" autocomplete="off" required> Yes
+                                </label>
+                                <label class="btn btn-secondary rounded">
+                                  <input type="radio" name="change_in_health" value="No" id="present_past_medical_condition2" autocomplete="off" required> No
+                                </label>
+                                <label class="btn btn-secondary rounded ml-1">
+                                  <input type="radio" name="change_in_health" value="Not Sure" id="present_past_medical_condition3" autocomplete="off" required> Not Sure/Maybe
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="quesTab">
+                      <div class="row" id="medicalHistory4">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Are you taking any medications, non-prescription drugs or herbal supplements of any kind? If yes, please list.</label>
+                            <div>
+                              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary rounded mr-1">
+                                  <input type="radio" name="anyMedication" value="Yes" id="anyMedication1" autocomplete="off" required> Yes
+                                </label>
+                                <label class="btn btn-secondary rounded">
+                                  <input type="radio" name="anyMedication" value="No" id="anyMedication2" autocomplete="off" required> No
+                                </label>
+                                <label class="btn btn-secondary rounded ml-1">
+                                  <input type="radio" name="anyMedication" value="Not Sure" id="anyMedication3" autocomplete="off" required> Not Sure/Maybe
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="quesTab">
+                      <div class="row" id="medicalHistory4">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Do you have any allergies? If you answered yes, please list using the categories below:</label>
+                            <div>
+                              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary rounded mr-1">
+                                  <input type="radio" name="allergies" value="Yes" id="allergies1" autocomplete="off" required> Yes
+                                </label>
+                                <label class="btn btn-secondary rounded">
+                                  <input type="radio" name="allergies" value="No" id="allergies2" autocomplete="off" required> No
+                                </label>
+                                <label class="btn btn-secondary rounded ml-1">
+                                  <input type="radio" name="allergies" value="Not Sure" id="allergies3" autocomplete="off" required> Not Sure/Maybe
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row d-none" id="catAllergy">
+                        
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row pt-1 pb-3">
+                      <div class="col-sm-6">
+                        <p>1 of 3</p>
+                      </div>
+                      <div class="col-sm-6 text-right">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.tab-pane -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ./wrapper -->
+
+
+  <!-- Footer starts Here -->
+
+  {% endblock %}
