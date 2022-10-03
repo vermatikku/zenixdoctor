@@ -6,5 +6,5 @@ Google_Auth_Secret = 'olb1VaEbQwAnQLOlQ5-x46Zn'
 
 Secret_Key = 'uh%mu765dpoud(pm2(+mb=n08y^sa^ur_7@zv%^f%^kv(1m64_'
 
-Email_Host_User = 'vjoshi5471k@gmail.com'
-Email_Host_Password = 'Dl0404@123'
+Email_Host_User = ''
+Email_Host_Password = ''
